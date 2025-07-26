@@ -35,7 +35,7 @@ package ConceptOfOperations {
 }
 package BusinessRequirements {
 	
-	private import Domain::*;
+	private import DomainPackage::MiningCorporation;
 	private import ScalarValues::*;
 	private import StakeholderConcerns::*;
 	    
@@ -44,14 +44,14 @@ package BusinessRequirements {
         doc /* The mining organization shall guarantee a profitability of 25.000 ISK/hour in order to provide 
          * suficcient incentive to pilots to work for the corporation.
          */      
-        subject miningFCorporation : Domain::MiningCorporation;
+        subject miningFCorporation : MiningCorporation;
         attribute profitability : Real;
         require constraint { profitability >= 25000 } 
         
         frame concern ProfitabilityConcern;
     }
     requirement <BUS01_1> profitabilityRequirement : ProfitabilityRequirement {
-    	subject miningCorporation : Domain::MiningCorporation;
+    	subject miningCorporation : MiningCorporation;
     	attribute :>> profitability = miningCorporation.minimumProfit ;
     }
 }

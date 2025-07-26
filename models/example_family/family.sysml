@@ -122,7 +122,7 @@ package Family {
 		end parent2 : Person[1];
 		end certifiedChild : Child[1];
 		timeslice adopted[1]{
-			snapshot certificate_valid_from = start;
+			snapshot certificate_valid = start;
 		}
 	}
 	// action definition

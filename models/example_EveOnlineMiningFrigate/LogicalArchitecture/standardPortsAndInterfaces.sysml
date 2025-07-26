@@ -35,8 +35,8 @@ package StdPortsAndInterfaces {
     
     // **High Slot Interface (Power + Activation Command)**
     interface def HighSlotInterface {
-        end hullPort : HighSlotPort;
-        end modulePort : ~HighSlotPort;
+        end hullPort : ~HighSlotPort;
+        end modulePort : HighSlotPort;
 
         flow of PowerSupply from hullPort.power to modulePort.power;
         flow of HighSlotCommand from hullPort.control to modulePort.control;
@@ -44,8 +44,8 @@ package StdPortsAndInterfaces {
 
     // **Medium Slot Interface (Power + Activation Command)**
     interface def MediumSlotInterface {
-        end hullPort : MediumSlotPort;
-        end modulePort : ~MediumSlotPort;
+        end hullPort : ~MediumSlotPort;
+        end modulePort : MediumSlotPort;
 
         flow of PowerSupply from hullPort.power to modulePort.power;
         flow of MediumSlotCommand from hullPort.control to modulePort.control;
@@ -53,8 +53,8 @@ package StdPortsAndInterfaces {
 
     // **Low Slot Interface (Activation Command Only)**
     interface def LowSlotInterface {
-        end hullPort : LowSlotPort;
-        end modulePort : ~LowSlotPort;
+        end hullPort : ~LowSlotPort;
+        end modulePort : LowSlotPort;
 
         flow of LowSlotCommand from hullPort.control to modulePort.control;
     }

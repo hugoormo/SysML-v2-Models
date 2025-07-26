@@ -1,14 +1,14 @@
 package MiningFrigateHullUseCases {
 
     private import MiningFrigateSolutionSpace::*;
-    private import Domain::*;
+    private import DomainPackage::*;
     private import COTS::*;
     private import MiningFrigateHull::*;
 
     // **Use Case: Manage Energy Supply and Recharge**
     use case ManageEnergy {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
+        actor pilotPod : PilotPod;
         actor smallCapBatteryI : SmallCapBatteryI;
 
         objective {
@@ -21,7 +21,7 @@ package MiningFrigateHullUseCases {
     // **Use Case: Detect Threat**
     use case DetectThreat {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
+        actor pilotPod : PilotPod;
 
         objective {
             doc /*
@@ -34,8 +34,8 @@ package MiningFrigateHullUseCases {
     // **Use Case: Engage Defenses**
     use case EngageDefenses {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
-        actor hostileShip : Domain::HostileShip;
+        actor pilotPod : PilotPod;
+        actor hostileShip : HostileShip;
 
         objective {
             doc /*
@@ -48,7 +48,7 @@ package MiningFrigateHullUseCases {
     // **Use Case: Navigate to Destination**
     use case NavigateToDestination {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
+        actor pilotPod : PilotPod;
 
         objective {
             doc /*
@@ -61,8 +61,8 @@ package MiningFrigateHullUseCases {
     // **Use Case: Transfer Ore**
     use case TransferOre {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
-        actor station : Domain::Station;
+        actor pilotPod : PilotPod;
+        actor station : Station;
 
         objective {
             doc /*
@@ -74,8 +74,8 @@ package MiningFrigateHullUseCases {
     // **Use Case: Dock to Station**
     use case DockToStation {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
-        actor station : Domain::Station;
+        actor pilotPod : PilotPod;
+        actor station : Station;
 
         objective {
             doc /*
@@ -88,7 +88,7 @@ package MiningFrigateHullUseCases {
     // **Use Case: Resupply Capacitor**
     use case ResupplyCapacitor {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
+        actor pilotPod : PilotPod;
         actor smallCapBatteryI : SmallCapBatteryI;
 
         objective {
@@ -101,7 +101,7 @@ package MiningFrigateHullUseCases {
     // **Use Case: Activate Mining Laser**
     use case ActivateMiningLaser {
         subject hull : LogicalMiningFrigateHull;
-        actor pilotPod : Domain::PilotPod;
+        actor pilotPod : PilotPod;
         actor miningLaser : MinerI;
 
         objective {

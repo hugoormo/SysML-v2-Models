@@ -1,20 +1,20 @@
 package MiningFrigateHullActions {
 
-    private import Domain::*;
+    private import DomainPackage::*;
     private import MiningFrigateSolutionSpace::*;
     private import MiningFrigateActions_logical::*;
     private import COTS::*;
     
     // **Action: Activate Mining Laser**
     action def PowerupHighPowerModule :> MiningFrigateActions_logical::PowerupHighPowerModule { 
-        in miningCommand : Domain::ShipCommand; 
-        out miningStatus : Domain::ShipReport;
+        in miningCommand : ShipCommand; 
+        out miningStatus : ShipReport;
     }
     
     // **Action: Manage Energy Supply and Recharge**
     action def ManageEnergy { 
-        in rechargeCommand : Domain::ShipCommand; 
-        out rechargeStatus : Domain::ShipReport;
+        in rechargeCommand : ShipCommand; 
+        out rechargeStatus : ShipReport;
 
         bind resupplyCapacitor.rechargeCommand = rechargeCommand;
         action resupplyCapacitor : ResupplyCapacitor { in rechargeCommand; out rechargeStatus; }
@@ -23,49 +23,49 @@ package MiningFrigateHullActions {
     
     // **Action: Detect Threat**
     action def DetectThreat { 
-        in scanCommand : Domain::ShipCommand; 
-        out scanReport : Domain::ShipReport; 
+        in scanCommand : ShipCommand; 
+        out scanReport : ShipReport; 
     }
 
     // **Action: Engage Defenses**
     action def EngageDefenses { 
-        in engageCommand : Domain::ShipCommand; 
-        out defenseStatus : Domain::ShipReport; 
+        in engageCommand : ShipCommand; 
+        out defenseStatus : ShipReport; 
     }
 
     // **Action: Navigate to Destination**
     action def NavigateToDestination { 
-        in destinationCommand : Domain::ShipCommand; 
-        out navigationStatus : Domain::ShipReport; 
+        in destinationCommand : ShipCommand; 
+        out navigationStatus : ShipReport; 
     }
 
     // **Action: Transfer Ore**
     action def TransferOre { 
-        in transferCommand : Domain::ShipCommand; 
-        out transferStatus : Domain::ShipReport; 
+        in transferCommand : ShipCommand; 
+        out transferStatus : ShipReport; 
     }
 
     // **Action: Dock at Station**
     action def DockToStation { 
-        in dockingCommand : Domain::ShipCommand; 
-        out dockingStatus : Domain::ShipReport; 
+        in dockingCommand : ShipCommand; 
+        out dockingStatus : ShipReport; 
     }
 
     // **Action: Resupply Capacitor**
     action def ResupplyCapacitor { 
-        in rechargeCommand : Domain::ShipCommand; 
-        out rechargeStatus : Domain::ShipReport; 
+        in rechargeCommand : ShipCommand; 
+        out rechargeStatus : ShipReport; 
     }
 
     // **Action: Check Asteroid Status**
     action def CheckAsteroidStatus { 
-        in miningCommand : Domain::ShipCommand; 
-        out asteroidStatus : Domain::ShipReport; 
+        in miningCommand : ShipCommand; 
+        out asteroidStatus : ShipReport; 
     }
 
     // **Action: Report Asteroid Depletion to Pilot**
     action def ReportToPilot { 
-        in asteroidStatus : Domain::ShipReport; 
-        out report : Domain::ShipReport; 
+        in asteroidStatus : ShipReport; 
+        out report : ShipReport; 
     }
 }

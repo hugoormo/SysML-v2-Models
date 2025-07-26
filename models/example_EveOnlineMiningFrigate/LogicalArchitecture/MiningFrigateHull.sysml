@@ -1,7 +1,7 @@
 package MiningFrigateHull {
     
-    private import Domain::*;
-    private import MiningFrigate::*;
+    private import DomainPackage::*;
+    private import MiningFrigatePackage::*;
     private import ScalarValues::*;
     private import COTS::*;
     private import StdPortsAndInterfaces::*;
@@ -44,9 +44,9 @@ package MiningFrigateHull {
         port lowSlot2 : LowSlotPort;
 
         //Ports bound to the LogicalMiningFrigateConfiguration
-        port hullControlPort : ~Domain::PodPort;
-        port hullDockingPort : ~Domain::DockingPort;
-        port hullDefensePort : ~Domain::ThreatPort;
-        port hullDroneControlPort: ~Domain::DroneControllerPort;
+        port hullControlPort : ~PodPort;
+        port hullDockingPort : ~DockingPort;
+        port hullDefensePort : ~ThreatPort;
+        port hullDroneControlPort: ~DroneControllerPort;
     }
 }

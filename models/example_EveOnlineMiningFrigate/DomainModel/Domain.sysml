@@ -1,11 +1,11 @@
-package Domain {
+package DomainPackage {
 	
 	private import ScalarValues::*;
 	private import ISQ::*;
 	private import SI::*;
 	private import ParametersOfInterestMetadata::*;
 	private import OperationalUseCaseActions::*;
-	private import MiningFrigate::*;
+	private import MiningFrigatePackage::*;
 	private import CauseAndEffect::*;
     private import CausationConnections::*;
 	
@@ -77,7 +77,7 @@ package Domain {
              */
         }          // %
 
-        #moe fleetSizeEffectiveness : Real {
+        #moe fleetSizeEffectiveness : Integer {
             doc /* Definition: Measures how effectively fleet size contributes to mining efficiency.
              * Relevance: Avoids over-scaling, which could increase operational costs.
              * Optimization: Balance fleet size with profit margins, avoiding unnecessary ship deployment.
@@ -126,7 +126,7 @@ package Domain {
              */
         }          // %
         
-        part miningFrigate : MiningFrigate::MiningFrigate [1..*]{
+        part miningFrigate : MiningFrigate [1..*]{
 
     		// Cause and Effect Occurrences
 	        timeslice miningRateIncreases;

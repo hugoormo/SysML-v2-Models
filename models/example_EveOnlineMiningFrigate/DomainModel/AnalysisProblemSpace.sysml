@@ -4,14 +4,14 @@ package analysisProblemSpace {
 	private import ScalarValues::*;
 	private import ISQ::*;
 	private import SI::*;
-	private import Domain::*;
-	private import MiningFrigate::*;
+	private import DomainPackage::*;
+	private import MiningFrigatePackage::*;
 	private import BusinessRequirements::BUS01_1;
 
     // **General Analysis Definition: Risk-Adjusted Profitability Calculation**
     analysis def RiskAdjustedProfitability {
 
-        subject miningcorporation : Domain::MiningCorporation;
+        subject miningcorporation : MiningCorporation;
 
         objective {
             doc /* Evaluates profitability across different security zones (High Sec, Low Sec, Null Sec) 
@@ -112,7 +112,7 @@ package analysisProblemSpace {
 	        in operationalCosts = 200000.0;  // ISK/hour (high cost due to logistics, security)
 	        in survivalProbability = 50.0;   // Very high risk, frequent losses
 	    }
-	    part analysisMiningCorporation : Domain::MiningCorporation ;
+	    part analysisMiningCorporation : MiningCorporation ;
 	    
 	    satisfy BUS01_1 by analysisMiningCorporation;
 	}

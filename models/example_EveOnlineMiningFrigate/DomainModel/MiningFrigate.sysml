@@ -1,14 +1,14 @@
- package MiningFrigate {
+ package MiningFrigatePackage {
  
 	private import ScalarValues::*;
 	private import ISQ::*;
 	private import SI::*;
 	private import ParametersOfInterestMetadata::*;
 	private import OperationalUseCaseActions::*;
-	private import Domain::*;
+	private import DomainPackage::*;
     private import StakeholderConcerns::*;
 	 
-	part def MiningFrigate :> Domain::Spaceship {
+	part def MiningFrigate :> Spaceship {
 
         attribute miningRate : Real;          // Volume of ore mined per second (m³/s)
         attribute droneCapacity : Integer; // Number, the maximum number of drones deployable (STRQ04)
@@ -26,15 +26,15 @@
         part oreHoldExpander: OreHoldExpander [0..2]; // Optional cargo expander module
         part capacitorBooster: CapacitorBooster [0..1]; // Configurable capacitor booster
         part warpCoreStabilizer: WarpCoreStabilizer [0..*]; // Optional defense modules
-        ref part cargo : Domain::CargoContainer [0..*];
-        ref part charge : Domain::Power;
-        ref part drone : Domain::Drone [0..5];
+        ref part cargo : CargoContainer [0..*];
+        ref part charge : Power;
+        ref part drone : Drone [0..5];
         
-        port controlPort : ~Domain::PodPort;
-        port dockingPort : ~Domain::DockingPort;
-        port defensePort : ~Domain::ThreatPort;
-        port asteroidOrePort : ~Domain::AsteroidOrePort;
-        port droneControlPort: ~Domain::DroneControllerPort;          	
+        port controlPort :  PodPort;
+        port dockingPort :  DockingPort;
+        port defensePort :  ThreatPort;
+        port asteroidOrePort :  AsteroidOrePort;
+        port droneControlPort:  DroneControllerPort;          	
 	}
     part miningFrigate : MiningFrigate{
         // State Definition for the Mining Frigate
@@ -61,19 +61,19 @@
             
             transition docked_to_inGrid
                 first Docked
-                accept pilotPodUndockCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept pilotPodUndockCommandSig : ShipCommand via miningFrigate.controlPort
                 do action undockFromStation : UndockFromStation {in undockCommand = pilotPodUndockCommandSig;}
                 then InGrid;  		
                 
             transition inGrid_to_docked
                 first InGrid
-                accept pilotPodDockCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept pilotPodDockCommandSig : ShipCommand via miningFrigate.controlPort
                 do action dockToStation : DockToStation {in dockCommand = pilotPodDockCommandSig;}
                 then Docked;
                 
             transition inGrid_to_onWarp
                 first InGrid
-                accept warpCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept warpCommandSig : ShipCommand via miningFrigate.controlPort
                 do action executeWarpDrive: ExecuteWarpDrive {in warpCommand = warpCommandSig;}
                 then OnWarp;
         
@@ -85,79 +85,79 @@
             //Internal transitions
             transition unloadCargo 
                 first Docked
-                accept unloadCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept unloadCommandSig : ShipCommand via miningFrigate.controlPort
                 do action transferOre : TransferOre {in unloadCommand = unloadCommandSig;}
                 then Docked;
             
             transition cycleMining 
                 first InGrid
-                accept miningCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept miningCommandSig : ShipCommand via miningFrigate.controlPort
                 do action activateMiningLaser : ActivateMiningLaser
                 then InGrid;
                 
             transition scanThreats
                 first InGrid
-                accept scanCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept scanCommandSig : ShipCommand via miningFrigate.controlPort
                 do action scanForThreats : ScanForThreats {in scanCommand = scanCommandSig;}
                 then InGrid;
 
             transition prioritizeThreat
                 first InGrid
-                accept threatSignatureSig : Domain::ScanSignature via miningFrigate.controlPort
+                accept threatSignatureSig : ScanSignature via miningFrigate.controlPort
                 do action prioritizeThreats : PrioritizeThreats {in detectedThreats = threatSignatureSig;}
                 then InGrid;
 
             transition deployDrones
                 first InGrid
-                accept droneCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept droneCommandSig : ShipCommand via miningFrigate.controlPort
                 do action selectDronesForDeployment : SelectDronesForDeployment {in droneCommand = droneCommandSig;}
                 then InGrid;
 
             transition navigation
                 first InGrid
-                accept destinationCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept destinationCommandSig : ShipCommand via miningFrigate.controlPort
                 do action acceptDestination : AcceptDestination {in destinationCommand = destinationCommandSig;}
                 then InGrid;
 
             transition coursePlot
                 first InGrid
-                accept courseCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept courseCommandSig : ShipCommand via miningFrigate.controlPort
                 do action plotOptimalCourse : PlotOptimalCourse
                 then InGrid;
 
             transition engagingPropulsion
                 first InGrid
-                accept propulsionCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept propulsionCommandSig : ShipCommand via miningFrigate.controlPort
                 do action engagePropulsion : EngagePropulsion { in engagePropulsion = propulsionCommandSig;}
                 then InGrid;
 
             transition adjustingCourse
                 first InGrid
-                accept courseCorrectionSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept courseCorrectionSig : ShipCommand via miningFrigate.controlPort
                 do action monitorAndAdjustCourse : MonitorAndAdjustCourse
                 then InGrid;
 
             transition cargoVerification
                 first Docked
-                accept warehouseStatusCommandSig : Domain::StationCommand via miningFrigate.controlPort
+                accept warehouseStatusCommandSig : StationCommand via miningFrigate.controlPort
                 do action verifyCargoTransfer : VerifyCargoTransfer {in warehouseStatusCommand = warehouseStatusCommandSig;}
                 then Docked;
 
             transition detectingThreat
                 first InGrid
-                accept threatScanCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept threatScanCommandSig : ShipCommand via miningFrigate.controlPort
                 do action detectThreat : DetectThreat {in scanCommand = threatScanCommandSig;}
                 then InGrid;
 
             transition engagingDefenses
                 first InGrid
-                accept defenseCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept defenseCommandSig : ShipCommand via miningFrigate.controlPort
                 do action engageDefenses : EngageDefenses {in engageCommand = defenseCommandSig;}
                 then InGrid;
 
             transition resupplying
                 first Docked
-                accept shipStatusCommandSig : Domain::ShipCommand via miningFrigate.controlPort
+                accept shipStatusCommandSig : ShipCommand via miningFrigate.controlPort
                 do action verifyResupply : VerifyResupply
                 then Docked;
         }

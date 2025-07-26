@@ -30,15 +30,15 @@ package StakeholderConcerns {
 
     private import ScalarValues::*;
     private import ISQ::*;
-    private import Domain::*;
+    private import DomainPackage::MiningCorporation;
     private import StakeholdersDef::*;
-    private import MiningFrigate::*;
+    private import MiningFrigatePackage::*;
 
     // The concerns are directly declared without definition, beacuse they aren't going to be reused in the scope of this model.
     // Concerns Derived from the Business Case
 
     concern ProfitabilityConcern {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall ensure that mining operations generate sufficient ISK/hour 
@@ -49,7 +49,7 @@ package StakeholderConcerns {
     }
 
     concern OperationalCostsConcern {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall minimize operational costs (e.g., ship replacements, 
@@ -60,7 +60,7 @@ package StakeholderConcerns {
     }
 
     concern ScalabilityConcern  {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         assume constraint {
             doc /* The Mining Corporation assumes that mining operations can scale effectively with 
@@ -71,7 +71,7 @@ package StakeholderConcerns {
     }
 
     concern MarketResponsivenessConcern  {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall adapt mining operations to fluctuating market demands 
@@ -84,7 +84,7 @@ package StakeholderConcerns {
     // Concerns Derived from the ConOps
 
     concern SecurityConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall ensure safety and survivability in hostile environments 
@@ -96,7 +96,7 @@ package StakeholderConcerns {
     }
 
     concern ResourceAvailabilityConcern  {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall ensure sufficient access to high-value asteroids, 
@@ -107,7 +107,7 @@ package StakeholderConcerns {
     }
 
     concern DeploymentEfficiencyConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall ensure rapid and efficient movement between resource 
@@ -118,7 +118,7 @@ package StakeholderConcerns {
     }
 
     concern ThreatNeutralizationConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall mitigate risks from NPC pirates and hostile players 
@@ -132,7 +132,7 @@ package StakeholderConcerns {
     // Concerns Derived from the MoEs
 
     concern TotalProfitabilityConcern  {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall maximize the total ISK/hour generated from mining 
@@ -143,7 +143,7 @@ package StakeholderConcerns {
     }
 
     concern OreYieldConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall maximize ore yield per frigate or fleet while avoiding 
@@ -154,7 +154,7 @@ package StakeholderConcerns {
     }
 
     concern SurvivabilityConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall ensure high survivability in hostile or dangerous environments. */
@@ -165,7 +165,7 @@ package StakeholderConcerns {
     }
 
     concern FleetDeploymentEfficiencyConcern  {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall ensure optimal fleet deployment to maximize ore extraction 
@@ -177,7 +177,7 @@ package StakeholderConcerns {
     }
 
     concern OreDeliveryEfficiencyConcern  {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
+        subject miningFrigate : MiningFrigate;
 
         require constraint {
             doc /* The Mining Frigate shall ensure fast and efficient transport of mined ore to stations 
@@ -188,7 +188,7 @@ package StakeholderConcerns {
     }
 
     concern RiskAdjustedProfitabilityConcern {
-        subject miningCorporation : Domain::MiningCorporation;
+        subject miningCorporation : MiningCorporation;
 
         require constraint {
             doc /* The Mining Corporation shall balance profitability with the risks of operating in 

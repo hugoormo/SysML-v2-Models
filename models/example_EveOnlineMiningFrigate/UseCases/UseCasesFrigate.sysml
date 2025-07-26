@@ -1,9 +1,9 @@
 package MiningFrigateUseCases {
 
     // Import the Domain package for referencing actors
-    private import Domain::*;
+    private import DomainPackage::*;
     private import MiningFrigateRequirements::*;
-    private import MiningFrigate::*;
+    private import MiningFrigatePackage::*;
 
     //Use Cases of the Mining Frigate
     
@@ -64,8 +64,8 @@ package MiningFrigateUseCases {
     
     // Included Use Case definition : Navigate to Destination
     use case def NavigateToDestination {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor pilotPod : Domain::PilotPod;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor pilotPod : DomainPackage::PilotPod;
 
         objective {
             doc /* Main Flow:
@@ -86,8 +86,8 @@ package MiningFrigateUseCases {
 
     // Included Use Case definition : Transfer Cargo
     use case def TransferCargo {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor pilotPod : Domain::PilotPod;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor pilotPod : DomainPackage::PilotPod;
 
         objective {
             doc /* Main Flow:
@@ -102,9 +102,9 @@ package MiningFrigateUseCases {
 
     // Included Use Case definition : Engage Defense Systems
     use case def EngageDefenseSystems {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor hostileShip : Domain::HostileShip;
-        actor pilotPod : Domain::PilotPod;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor hostileShip : DomainPackage::HostileShip;
+        actor pilotPod : DomainPackage::PilotPod;
         objective {
             doc /* Main Flow:
                   * 1. Detect and classify threats using the sensor array.
@@ -119,8 +119,8 @@ package MiningFrigateUseCases {
 
     // Included Use Case definition : Resupply Systems
     use case def ResupplySystems {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor station : Domain::Station;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor station : DomainPackage::Station;
 
         objective {
             doc /* Main Flow:
@@ -135,9 +135,9 @@ package MiningFrigateUseCases {
 
     // Main Use Case definition : Mine Asteroids
     use case def MineAsteroids {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor pilotPod : Domain::PilotPod;
-        actor asteroidBelt : Domain::AsteroidBelt;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor pilotPod : DomainPackage::PilotPod;
+        actor asteroidBelt : DomainPackage::AsteroidBelt;
         objective {
             doc /* Main Flow:
                   * 1. Identify an asteroid belt and select a target asteroid.
@@ -158,9 +158,9 @@ package MiningFrigateUseCases {
 
     // Main Use Case definition : Detect Threats and Engage Defenses
     use case def DetectThreatsAndEngageDefenses {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor hostileShip : Domain::HostileShip;
-        actor pilotPod : Domain::PilotPod;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor hostileShip : DomainPackage::HostileShip;
+        actor pilotPod : DomainPackage::PilotPod;
 
         objective {
             doc /* Main Flow:
@@ -180,9 +180,9 @@ package MiningFrigateUseCases {
 
     // Main Use Case definition : Plot Course and Navigate
     use case def PlotCourseAndNavigate {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor pilotPod : Domain::PilotPod;
-        actor station : Domain::Station;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor pilotPod : DomainPackage::PilotPod;
+        actor station : DomainPackage::Station;
 
         objective {
             doc /* Main Flow:
@@ -202,8 +202,8 @@ package MiningFrigateUseCases {
 
     // Main Use Case definition : Offload Ore and Resupply
     use case def OffloadOreAndResupply {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor station : Domain::Station;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor station : DomainPackage::Station;
 
         objective {
             doc /* Main Flow:
@@ -225,9 +225,9 @@ package MiningFrigateUseCases {
 
     // Main Use Case definition : Deploy Drones
     use case def DeployDrones {
-        subject miningFrigate : MiningFrigate::MiningFrigate;
-        actor pilotPod : Domain::PilotPod;
-        actor hostileShip : Domain::HostileShip;
+        subject miningFrigate : MiningFrigatePackage::MiningFrigate;
+        actor pilotPod : DomainPackage::PilotPod;
+        actor hostileShip : DomainPackage::HostileShip;
 
         objective {
             doc /* Main Flow:
