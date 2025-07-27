@@ -16,49 +16,49 @@ package MiningFrigateSolutionSpace {
         doc /* The Mining Frigate consists of a fixed hull structure with modular (COTS) components 
          * that can be replaced or upgraded depending on operational needs. */
 
-        part logicalHull : LogicalMiningFrigateHull :> miningFrigate.coreSystem ;
+        part Hulllogical : LogicalMiningFrigateHull :> miningFrigate.coreSystem ;
 
         //The parts of the LogicalMiningFrigate are a subset of the parts of the MiningFrigate 
         // COTS Modules (Ref Parts - Exchangeable)
         //the mining laser is available in three variants
-        variation ref part miningLaser : MinerModule[2] :> miningFrigate.miningLaser {
+        variation ref part miningLaserlogical : MinerModule[2] :> miningFrigate.miningLaser {
             variant 'Mining Laser EP-S Gaussian Scoped';
             variant 'Mining Laser Particle Bore Compact';
             variant minerI : MinerI;
         }             
-        ref part propulsionModule : Afterburner[0..1] :> miningFrigate.propulsionModule; 
-        ref part shieldModule : SmallShieldExtenderI[0..1] :> miningFrigate.shieldModule; 
-        ref part capacitorModule : SmallCapBatteryI[0..1] :> miningFrigate.capacitorBooster;  
-        ref part sensorModule : SurveyScannerI[0..1] :> miningFrigate.sensorModule;  
-        ref part warpCoreStabilizer : WarpCoreStabilizerI[0..2] :> miningFrigate.warpCoreStabilizer; 
+        ref part propulsionModulelogical : Afterburner[0..1] :> miningFrigate.propulsionModule; 
+        ref part shieldModulelogical : SmallShieldExtenderI[0..1] :> miningFrigate.shieldModule; 
+        ref part capacitorModulelogical : SmallCapBatteryI[0..1] :> miningFrigate.capacitorBooster;  
+        ref part sensorModulelogical : SurveyScannerI[0..1] :> miningFrigate.sensorModule;  
+        ref part warpCoreStabilizerlogical : WarpCoreStabilizerI[0..2] :> miningFrigate.warpCoreStabilizer; 
         
         //internal conexions between parts of the LogicalMiningFrigateConfiguration
         interface highSlotInterface1 : HighSlotInterface connect
-        	hullPort ::> logicalHull.highSlot1 to
-        	modulePort ::> miningLaser.highSlot;
+        	hullPort ::> Hulllogical.highSlot1 to
+        	modulePort ::> miningLaserlogical.highSlot;
 
 	    interface highSlotInterface2 : HighSlotInterface connect
-	        hullPort ::> logicalHull.highSlot2 to
-	        modulePort ::> miningLaser.highSlot;
+	        hullPort ::> Hulllogical.highSlot2 to
+	        modulePort ::> miningLaserlogical.highSlot;
 	
 	    interface mediumSlotInterface1 : MediumSlotInterface connect
-	        hullPort ::> logicalHull.mediumSlot1 to
-	        modulePort ::> propulsionModule.mediumSlot;
+	        hullPort ::> Hulllogical.mediumSlot1 to
+	        modulePort ::> propulsionModulelogical.mediumSlot;
 	
 	    interface mediumSlotInterface2 : MediumSlotInterface connect
-	        hullPort ::> logicalHull.mediumSlot2 to
-	        modulePort ::> shieldModule.mediumSlot;
+	        hullPort ::> Hulllogical.mediumSlot2 to
+	        modulePort ::> shieldModulelogical.mediumSlot;
 	
 	    interface lowSlotInterface1 : LowSlotInterface connect
-	        hullPort ::> logicalHull.lowSlot1 to
-	        modulePort ::> warpCoreStabilizer.lowSlot; 
+	        hullPort ::> Hulllogical.lowSlot1 to
+	        modulePort ::> warpCoreStabilizerlogical.lowSlot; 
         
         //the ports of the LogicalMiningFrigateConfiguration are bound to the ports of the LogicalMiningFriagteHull
         //the external ports of LogicalMiningFrigateConfiguration are not redefined because they must be same as the ones at the problem space.
-        bind controlPort = logicalHull.hullControlPort;
-        bind dockingPort = logicalHull.hullDockingPort;
-        bind defensePort = logicalHull.hullDefensePort;
-        bind droneControlPort = logicalHull.hullDroneControlPort;
+        bind controlPort = Hulllogical.hullControlPort;
+        bind dockingPort = Hulllogical.hullDockingPort;
+        bind defensePort = Hulllogical.hullDefensePort;
+        bind droneControlPort = Hulllogical.hullDroneControlPort;
   
     }
 
@@ -69,140 +69,140 @@ package MiningFrigateSolutionSpace {
         state logicalMiningFrigateStates :>> miningFrigate.miningFrigatesStates {
             
             entry;
-            then Docked; //boarding a ship is not modeled.
+            then Dockedlogical; //boarding a ship is not modeled.
 
-            state Packaged {
+            state Packagedlogical {
                 doc /* The mining frigate is packaged inside a station and can be cargoed. */
             }	 	
-            state Parked {
+            state Parkedlogical {
                 doc /* The mining frigate is parked inside a station, but not boarded by a pod. */
             }	 	
-            state Docked {
+            state Dockedlogical {
                 doc /* The mining frigate is inside a station, available for refitting, resupply, or cargo transfer. */
             }
-            state InGrid {
+            state InGridlogical {
                 doc /* The mining frigate is in open space, near asteroids, stations, or other celestial objects. */
             }
-            state OnWarp {
+            state OnWarplogical {
                 doc /* The mining frigate is in warp, traveling between locations. */
             }
             
-            transition docked_to_inGrid 
-                first Docked
+            transition docked_to_inGridlogical 
+                first Dockedlogical
                 accept pilotPodUndockCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action undockFromStation_logical : UndockFromStation_logical {in undockCommand = pilotPodUndockCommandSig;}
-                then InGrid;  		
+                then InGridlogical;  		
                 
-            transition inGrid_to_docked
-                first InGrid
+            transition inGrid_to_dockedlogical
+                first InGridlogical
                 accept pilotPodDockCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action dockToStation_logical : DockToStation_logical {in dockCommand = pilotPodDockCommandSig;}
-                then Docked;
+                then Dockedlogical;
                 
-            transition inGrid_to_onWarp
-                first InGrid
+            transition inGrid_to_onWarplogical
+                first InGridlogical
                 accept warpCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action executeWarpDrive_logical : ExecuteWarpDrive_logical {in warpCommand = warpCommandSig;}
-                then OnWarp;
+                then OnWarplogical;
         
-            transition onWarp_to_inGrid
-                first OnWarp
+            transition onWarp_to_inGridlogical
+                first OnWarplogical
                 accept when logicalMiningFrigateConfiguration.warpBubbleEnd
-                then InGrid;     	
+                then InGridlogical;     	
             
             //Internal transitions
-            transition unloadCargo 
-                first Docked
+            transition unloadCargological 
+                first Dockedlogical
                 accept unloadCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action transferOre_logical : TransferOre_logical {in unloadCommand = unloadCommandSig;}
-                then Docked;
+                then Dockedlogical;
             
-            transition cycleMining 
-                first InGrid
+            transition cycleMininglogical 
+                first InGridlogical
                 accept miningCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action activateMiningLaser_logical : ActivateMiningLaser_logical
-                then InGrid;
+                then InGridlogical;
                 
-            transition scanThreats
-                first InGrid
+            transition scanThreatslogical
+                first InGridlogical
                 accept scanCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action scanForThreats_logical : ScanForThreats_logical {in scanCommand = scanCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition prioritizeThreat
-                first InGrid
+            transition prioritizeThreatlogical
+                first InGridlogical
                 accept threatSignatureSig : ScanSignature via logicalMiningFrigateConfiguration.controlPort
                 do action prioritizeThreats_logical : PrioritizeThreats_logical {in detectedThreats = threatSignatureSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition deployDrones
-                first InGrid
+            transition deployDroneslogical
+                first InGridlogical
                 accept droneCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action selectDronesForDeployment_logical : SelectDronesForDeployment_logical {in droneCommand = droneCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition navigation
-                first InGrid
+            transition navigationlogical
+                first InGridlogical
                 accept destinationCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action acceptDestination_logical : AcceptDestination_logical {in destinationCommand = destinationCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition coursePlot
-                first InGrid
+            transition coursePlotlogical
+                first InGridlogical
                 accept courseCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action plotOptimalCourse_logical : PlotOptimalCourse_logical
-                then InGrid;
+                then InGridlogical;
 
-            transition engagingPropulsion
-                first InGrid
+            transition engagingPropulsionlogical
+                first InGridlogical
                 accept propulsionCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action engagePropulsion_logical : EngagePropulsion_logical { in engagePropulsion = propulsionCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition adjustingCourse
-                first InGrid
+            transition adjustingCourselogical
+                first InGridlogical
                 accept courseCorrectionSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action monitorAndAdjustCourse_logical : MonitorAndAdjustCourse_logical
-                then InGrid;
+                then InGridlogical;
 
-            transition cargoVerification
-                first Docked
+            transition cargoVerificationlogical
+                first Dockedlogical
                 accept warehouseStatusCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action verifyCargoTransfer_logical : VerifyResupply_logical {in warehouseStatusCommand = warehouseStatusCommandSig;}
-                then Docked;
+                then Dockedlogical;
 
-            transition detectingThreat
-                first InGrid
+            transition detectingThreatlogical
+                first InGridlogical
                 accept threatScanCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action detectThreat_logical : DetectThreat_logical {in scanCommand = threatScanCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition engagingDefenses
-                first InGrid
+            transition engagingDefenseslogical
+                first InGridlogical
                 accept defenseCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action engageDefenses_logical : EngageDefenses_logical {in engageCommand = defenseCommandSig;}
-                then InGrid;
+                then InGridlogical;
 
-            transition resupplying
-                first Docked
+            transition resupplyinglogical
+                first Dockedlogical
                 accept shipStatusCommandSig : ShipCommand via logicalMiningFrigateConfiguration.controlPort
                 do action verifyResupply_logical : VerifyCargoTransfer_logical
-                then Docked;
+                then Dockedlogical;
         }       
         
     }
     
     //Three different configurations of mining frigatte are defined here that base on an abstract frigate
     part logicalNoviceMiningFrigatte :> logicalMiningFrigateConfiguration{
-        part redefines miningLaser = miningLaser::minerI;
+        part redefines miningLaserlogical = miningLaserlogical::minerI;
     }
 
     part logicalTrainerMiningFrigate :> logicalMiningFrigateConfiguration{
-        part redefines miningLaser = miningLaser::'Mining Laser Particle Bore Compact';
+        part redefines miningLaserlogical = miningLaserlogical::'Mining Laser Particle Bore Compact';
     } 
 
     part logicalFieldMiningFrigate :> logicalMiningFrigateConfiguration{
-        part redefines miningLaser = miningLaser::'Mining Laser EP-S Gaussian Scoped';
+        part redefines miningLaserlogical = miningLaserlogical::'Mining Laser EP-S Gaussian Scoped';
     } 
 
 }
