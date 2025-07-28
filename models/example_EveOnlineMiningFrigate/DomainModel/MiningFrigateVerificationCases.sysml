@@ -82,12 +82,11 @@ package MiningFrigateRequirementsVerification {
         }
 
         action evaluateData {
-            in miningRateMeasuredLS = collectData.miningRateMeasuredLS;
+            in evalMiningRateMeasuredLS = collectData.miningRateMeasuredLS;
             out verdict : VerdictKind =
             // Check if mining rates satisfy the OreExtractionEfficiencyRequirement.
             PassIf(oreExtractionEfficiencyRequirementLowSec(
-            	miningFrigate = testMiningFrigate,
-                miningRateLS = miningRateMeasuredLS));
+            	myMiningFrigate = testMiningFrigate));
         }
 
         return :>> verdict : VerdictKind = evaluateData.verdict;
@@ -116,8 +115,7 @@ package MiningFrigateRequirementsVerification {
             out verdict : VerdictKind =
             // Check if cargo capacity satisfies the CargoCapacityRequirement.
             PassIf(cargoCapacityRequirementLowSec(
-                miningFrigate = testMiningFrigate,
-                cargoCapacity = cargoCapacityMeasured));
+                myMiningFrigate = testMiningFrigate));
         }
 
         return verdict : VerdictKind = evaluateData.verdict;
@@ -151,8 +149,7 @@ package MiningFrigateRequirementsVerification {
             out verdict : VerdictKind =
             // Check if shield strength satisfies the SurvivabilityRequirement.
             PassIf(survivabilityRequirementLowSec(
-                miningFrigate = testMiningFrigate,
-                shieldStrengthLS = shieldStrengthMeasuredLS));
+                myMiningFrigate = testMiningFrigate));
         }
 
         return verdict : VerdictKind = evaluateData.verdict;
@@ -181,8 +178,7 @@ package MiningFrigateRequirementsVerification {
             out verdict : VerdictKind =
             // Check if the drone capacity satisfies the DroneOperationsRequirement.
             PassIf(droneOperationsRequirementLowSec(
-                miningFrigate = testMiningFrigate,
-                droneCapacity = droneCapacityMeasured
+                myMiningFrigate = testMiningFrigate
             ));
         }
 
@@ -212,8 +208,7 @@ package MiningFrigateRequirementsVerification {
             out verdict : VerdictKind =
             // Check if the threat detection range satisfies the ThreatDetectionRequirement.
             PassIf(threatDetectionRequirementLowSec(
-                miningFrigate = testMiningFrigate,
-                threatDetectionRange = threatDetectionRangeMeasured
+                myMiningFrigate = testMiningFrigate
             ));
         }
 

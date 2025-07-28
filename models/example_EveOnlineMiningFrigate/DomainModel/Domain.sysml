@@ -221,6 +221,7 @@ package DomainPackage {
     
     part def Rorqual :> Spaceship {
         #mop oreStorageCapacity : Real; //Rorquals can tractor and store storage containers
+        attribute oreCompressionRatio : Real;
         part oreCompressionUnit : OreCompressionUnit; //Module used to compress Ores
     }
     

@@ -159,8 +159,8 @@ package Family {
 		/* the age of a legal adoptive parent must be more than 18 years */
 		attribute parent1Age : Natural;
 		attribute parent2Age : Natural;
-		require minimumAgeForAdoptiveParenthood { 
-			parent1Age >= minAdoptingPartyAge & parent2Age >= minAdoptingPartyAge 
+		require constraint minimumAgeForAdoptiveParenthood { 
+			parent1Age >= minAdoptingPartyAge and parent2Age >= minAdoptingPartyAge 
 		}
 	}
 	//Interaction for the defined use case
