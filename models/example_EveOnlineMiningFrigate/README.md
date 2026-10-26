@@ -1,4 +1,6 @@
 # Eve Online Mining Frigate
+The model is now available as a .kpar at https://sysand.com/projects/hugoormo/sysmlv2-sandbox/
+the model in this repository is deprecated.
 This package defines a mining frigate in the context of a mining corporation in the online game Eve-Online.
 The model has been generated with an LLM following a series of questions that are aimed to identify the operational motivation of the system of interest (the mining frigate) and ultimately define their problem space. The model is mounted from the responses of the LLM in separate configuration items (files).
 The selection of this example to test the domain capabilites of an LLM is based on the availability of information in internet about the mechanics of the game and the in-game market data and trends. The SysMLv2 model was built using ChatGPT:SysMLv2 Co-Pilot.
